@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Minha Loja</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Minha Loja</h1>
+
+        <nav>
+            <a href="#Inicio">Início</a>
+            <a href="#Produtos">Produtos</a>
+            <a href="#Contato">Contato</a>
+        </nav>
+    </header>
+
+
+    <section class="inicio" id="Inicio">
+
+        <h2>Bem-vindo à Minha Loja!</h2>
+
+        <p>Encontre os melhores produtos aqui.</p>
+
+        <button onclick="mostrarMensagem()">
+            Clique aqui
+        </button>
+
+    </section>
+
+
+ <section id="Produtos">
+
+    <h2>Produtos</h2>
+
+    <div class="produtos">
+
+        <div class="produto">
+            <h3>Produto 1</h3>
+            <p>R$ 50,00</p>
+            <button onclick="adicionarProduto('Produto 1', 50)">
+                Comprar
+            </button>
+        </div>
+
+        <div class="produto">
+            <h3>Produto 2</h3>
+            <p>R$ 80,00</p>
+            <button onclick="adicionarProduto('Produto 2', 80)">
+                Comprar
+            </button>
+        </div>
+
+    </div>
+
+    <h2>Carrinho</h2>
+
+    <div id="carrinho"></div>
+
+    <p>Total: R$ <span id="total">0.00</span></p>
+    
+    <button onclick="LimparCarrinho()">LimparCarrinho</button>
+</section>
+
+
+    <section id="Contato">
+
+        <h2>Contato</h2>
+
+        <p>Entre em contato conosco!</p>
+
+        <button>Enviar mensagem</button>
+
+    </section>
+
+    <script src="script.js"></script>
+
