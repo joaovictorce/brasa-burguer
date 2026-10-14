@@ -1,93 +1,119 @@
-function mostrarMensagem() {
-    alert("Bem-vindo à minha loja!");
-}
 
-let carrinho = [];
+const carrinho = [];
 
-function adicionarProduto(nome, preco) {
+const botoesAdicionar = document.querySelectorAll(
+    ".produto button"
+);
 
-    let produtoExistente = carrinho.find(
-        produto => produto.nome === nome
-    );
+const painel = document.getElementById("carrinho-painel");
+const contador = document.getElementById("contador-carrinho");
+const lista = document.getElementById("lista-carrinho");
+const totalElemento = document.getElementById("total-carrinho");
 
-    if (produtoExistente) {
-        produtoExistente.quantidade++;
-    } else {
-        carrinho.push({
-            nome: nome,
-            preco: preco,
-            quantidade: 1
-        });
-    }
+const formatarPreco = (valor) =>
+    valor.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    });
 
-    atualizarCarrinho();
-}
+// ADICIONAR PRODUTOS
+botoesAdicionar.forEach((botao) => {
+    botao.addEventListener("click", () => {
+        const produto = botao.closest(".produto");
 
+        const nome = produto.querySelector("h3").textContent;
+        const precoTexto = produto.querySelector("strong").textContent;
 
-function aumentarQuantidade(nome) {
+        const preco = Number(
+            precoTexto.replace("R$", "")
+                .trim()
+                .replace(/\./g, "")
+                .replace(",", ".")
+        );
 
-    let produto = carrinho.find(
-        produto => produto.nome === nome
-    );
+        carrinho.push({ nome, preco });
 
-    if (produto) {
-        produto.quantidade++;
-    }
+        atualizarCarrinho();
+    });
+});
 
-    atualizarCarrinho();
-}
-
-
-function diminuirQuantidade(nome) {
-
-    let produto = carrinho.find(
-        produto => produto.nome === nome
-    );
-
-    if (produto && produto.quantidade > 1) {
-        produto.quantidade--;
-    }
-
-    atualizarCarrinho();
-}
-
-
+// ATUALIZAR CARRINHO
 function atualizarCarrinho() {
-
-    let carrinhoHTML = "";
+    lista.innerHTML = "";
     let total = 0;
 
-    for (let produto of carrinho) {
+     
+carrinho.forEach((produto, indice) => {
+    const item = document.createElement("li");
 
-        total = total + (produto.preco * produto.quantidade);
+    const nome = document.createElement("span");
+    nome.textContent =
+        `${produto.nome} - ${formatarPreco(produto.preco)}`;
 
-        carrinhoHTML += `
-            <div>
-                <p>
-                    ${produto.nome} - R$ ${produto.preco.toFixed(2)}
-                </p>
+    const botaoRemover = document.createElement("button");
+    botaoRemover.textContent = "Remover";
+    botaoRemover.className = "remover-produto";
 
-                <button onclick="diminuirQuantidade('${produto.nome}')">
-                    -
-                </button>
+    botaoRemover.addEventListener("click", () => {
+        carrinho.splice(indice, 1);
+        atualizarCarrinho();
+    });
 
-                <span>${produto.quantidade}</span>
+    item.appendChild(nome);
+    item.appendChild(botaoRemover);
+    lista.appendChild(item);
 
-                <button onclick="aumentarQuantidade('${produto.nome}')">
-                    +
-                </button>
-            </div>
-        `;
-    }
+    total += produto.preco;
+});
 
-    document.getElementById("carrinho").innerHTML = carrinhoHTML;
 
-    document.getElementById("total").textContent = total.toFixed(2);
+    contador.textContent = carrinho.length;
+    totalElemento.textContent = formatarPreco(total);
 }
 
+// ABRIR E FECHAR
+document.getElementById("abrir-carrinho")
+    .addEventListener("click", () => {
+        painel.classList.add("ativo");
+    });
 
-function limparCarrinho() {
-    carrinho = [];
+document.getElementById("fechar-carrinho")
+    .addEventListener("click", () => {
+        painel.classList.remove("ativo");
+    });
+    
+// Número fictício para demonstração.
+// Substitua por um número real antes de usar com clientes.
+const numeroWhatsApp = "5511944623120";
 
-    atualizarCarrinho();
-}
+document.getElementById("finalizar-pedido")
+    .addEventListener("click", () => {
+
+        if (carrinho.length === 0) {
+            alert("Adicione um produto ao carrinho!");
+            return;
+        }
+
+        if (!numeroWhatsApp) {
+            alert("Configure o número da hamburgueria antes de enviar pedidos.");
+            return;
+        }
+
+        let mensagem = "Olá! Gostaria de fazer um pedido:\n\n";
+        let total = 0;
+
+        carrinho.forEach((produto) => {
+            mensagem +=
+                `🍔 ${produto.nome} - ${formatarPreco(produto.preco)}\n`;
+
+            total += produto.preco;
+        });
+
+        mensagem += `\nTotal: ${formatarPreco(total)}`;
+        mensagem += "\n\nAguardo a confirmação do pedido!";
+
+        const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+
+        window.open(url, "_blank", "noopener,noreferrer");
+    });
+

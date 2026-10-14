@@ -1,122 +1,348 @@
-*{
-   margin: 0;
-   padding: 0%;
-   box-sizing: border-box;
 
-}
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-header {
-    background-color: #6c2bd9;
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #111111;
     color: white;
-    padding: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* CABEÇALHO */
+.cabecalho {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 22px 7%;
+    background: #0b0b0b;
+    gap: 25px;
 }
-nav a {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;    
+
+.logo {
+    font-size: 24px;
+    font-weight: 900;
+    white-space: nowrap;
 }
-.inicio {
-    text-align: center;
-    padding: 80px 20px;
+
+.logo span {
+    color: #ffad32;
 }
-.inicio h2 {
-    font-size: 40px;
-    margin-bottom: 15px;
-}
-button {
-    background-color: #6c2bd9;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-top: 15px;
-}
-button:hover{
-    background-color: #5120a8;
-}
-#produtos {
-    padding: 50px 20px;
-    text-align: center;
-}
-.produtos {
+
+.menu {
     display: flex;
-    justify-content: center;
+    gap: 28px;
+}
+
+.menu a {
+    font-size: 12px;
+    font-weight: 700;
+    transition: color 0.3s;
+}
+
+.menu a:hover {
+    color: #ffad32;
+}
+
+.botao-pedido,
+.botao-principal {
+    background: #ffad32;
+    color: #111;
+    padding: 17px 25px;
+    border-radius: 10px;
+    font-weight: 800;
+    font-size: 12px;
+}
+
+/* BANNER */
+.banner {
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    padding: 70px 8%;
+    background:
+        linear-gradient(90deg,
+            rgba(0,0,0,0.96) 0%,
+            rgba(0,0,0,0.75) 42%,
+            rgba(0,0,0,0.1) 100%),
+        url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1600')
+        center/cover no-repeat;
+}
+
+.banner-conteudo {
+    max-width: 620px;
+}
+
+.destaque {
+    color: #ffad32;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+}
+
+.banner h1 {
+    font-size: clamp(42px, 6vw, 78px);
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 22px;
+}
+
+.banner h1 span {
+    display: block;
+    color: #ffad32;
+}
+
+.descricao {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #ddd;
+    max-width: 450px;
+}
+
+.botoes {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.botao-secundario {
+    border: 1px solid white;
+    padding: 17px 25px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* BENEFÍCIOS */
+.beneficios {
+    display: flex;
+    justify-content: space-around;
     gap: 20px;
+    padding: 30px 7%;
+    background: #0b0b0b;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* CARDÁPIO */
+.cardapio {
+    padding: 70px 7%;
+}
+
+.cardapio h2 {
+    font-size: 42px;
+    font-weight: 900;
+    margin-bottom: 30px;
+}
+
+.produtos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.produto {
+    background: #191919;
+    border: 1px solid #333;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.produto:hover {
+    transform: translateY(-6px);
+}
+
+.produto img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+}
+
+.produto-info {
+    padding: 22px;
+}
+
+.produto h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.produto p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #bbb;
+}
+
+.produto-rodape {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.produto strong {
+    color: #ffad32;
+    font-size: 21px;
+}
+
+.produto button {
+    background: #ffad32;
+    border: none;
+    padding: 13px 18px;
+    border-radius: 9px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.sobre, footer {
+    padding: 35px 7%;
+    text-align: center;
+}
+
+/* CELULAR */
+@media (max-width: 768px) {
+    .cabecalho {
+        flex-direction: column;
+    }
+
+    .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .banner {
+        padding: 65px 6%;
+    }
+
+    .beneficios {
+        flex-direction: column;
+        align-items: center;
     }
 
     .produtos {
-    
-    background-color: white;
-    padding: 30px;
-    width: 220px;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(red, green, blue, alpha);
+        grid-template-columns: 1fr;
+    }
+
+    .cardapio h2 {
+        font-size: 34px;
+    }
 }
-footer {
-    background-color: #222;
+
+/* BOTÃO DO CARRINHO */
+.carrinho-botao {
+    background: transparent;
     color: white;
-    text-align: center;
-    padding: 20px;
-    margin-top: 50px;
-}
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: f5f5f5;
-    color: #333;
-}
-header {
-    background-color: purple;
-    color: white;
-    padding: 20px;
-}
-nav a {
-    color: white;
-    margin-right: 15px;
-    text-decoration: none;
-}
-.inicio {
-    text-align: center;
-    padding: 80px 20px;
-}
-button {
-    background-color: purple;
-    color: white;
-    border: none;
-    padding: 12px 20px;
+    border: 1px solid #ffad32;
+    padding: 12px;
     border-radius: 8px;
     cursor: pointer;
+    font-weight: bold;
 }
-.inicio {
-    text-align: center;
-    padding: 100px 20px;
+
+/* PAINEL DO CARRINHO */
+.carrinho-painel {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(380px, 100%);
+    height: 100vh;
+    background: #191919;
+    padding: 25px;
+    z-index: 1000;
+    box-shadow: -5px 0 25px #0008;
+    overflow-y: auto;
 }
-.inicio h2 {
-    font-size: 40px;
-    margin-bottom: 20px;
+
+.carrinho-painel.ativo {
+    display: block;
 }
-.inicio p {
-    font-size: 20px;
-    margin-bottom: 20px;
+
+.carrinho-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
 }
-section {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 40px 20px;
+
+.carrinho-topo button {
+    background: #ffad32;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
 }
-#Produtos {
+
+#lista-carrinho {
+    list-style: none;
+    margin-bottom: 25px;
+}
+
+#lista-carrinho li {
+    padding: 12px 0;
+    border-bottom: 1px solid #444;
+    font-size: 14px;
+}
+
+#total-carrinho {
+    color: #ffad32;
+}
+
+#lista-carrinho li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.remover-produto {
+    background: #d93636;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 10px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.remover-produto:hover {
+    background: #a91f1f;
+}
+
+#finalizar-pedido {
+    width: 100%;
+    background: #25d366;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 16px;
     margin-top: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
 }
-#Contato{
-    text-align: center;
-    padding: 30px 20px;
-    margin-top: 20px;
+
+#finalizar-pedido:hover {
+    background: #1da851;
 }
+
+
